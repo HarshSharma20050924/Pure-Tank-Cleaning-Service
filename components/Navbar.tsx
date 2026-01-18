@@ -27,10 +27,9 @@ const Navbar: React.FC = () => {
         
         {/* Brand Logo & Name */}
         <div className="flex items-center gap-3">
-          {/* NAVBAR LOGO PLACEHOLDER */}
+          {/* Logo Image */}
           <div className="h-10 w-10 bg-white rounded-full flex items-center justify-center overflow-hidden border-2 border-[#0B2F5C] shadow-sm shrink-0">
              <img src="/logo.png" alt="Logo" className="h-full w-full object-cover" />
-             {/* <span className="text-[#0B2F5C] font-bold text-[8px] text-center leading-tight">YOUR<br/>LOGO</span> */}
           </div>
 
           <div className="flex flex-col">
@@ -58,6 +57,7 @@ const Navbar: React.FC = () => {
             href={WHATSAPP_LINK}
             target="_blank"
             rel="noreferrer"
+            onClick={() => console.log('WhatsApp Button Clicked (Navbar Desktop)')}
             className="flex items-center gap-2 bg-green-600 hover:bg-green-700 text-white px-6 py-2.5 rounded-full text-sm font-bold transition-colors shadow-lg"
           >
             <Phone size={18} fill="currentColor" />
@@ -91,6 +91,7 @@ const Navbar: React.FC = () => {
           <div className="pt-4 flex flex-col gap-3">
             <a 
                 href={WHATSAPP_LINK}
+                onClick={() => console.log('WhatsApp Button Clicked (Navbar Mobile)')}
                 className="flex items-center justify-center gap-3 bg-green-600 text-white px-5 py-4 rounded-xl font-bold text-lg shadow-lg"
             >
                 <Phone size={20} fill="currentColor" />

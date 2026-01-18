@@ -22,14 +22,10 @@ const Hero: React.FC = () => {
           {/* LEFT SIDE CONTENT (Text) */}
           <div className="order-1 text-center md:text-left">
             
-            {/* LOGO PLACEHOLDER HERO */}
+            {/* LOGO IN HERO */}
             <div className="mb-6 inline-block">
                 <div className="h-20 w-20 md:h-24 md:w-24 bg-white rounded-full flex items-center justify-center border-4 border-[#1e40af] shadow-lg overflow-hidden relative mx-auto md:mx-0">
-                    <img src="logo.png" alt="Logo" className="w-full h-full object-contain" />
-                    <div className="text-center leading-none">
-                        {/* <span className="block text-[#1e40af] font-black text-xs">PURE</span>
-                        <span className="block text-sky-500 font-bold text-[10px]">TANK</span> */}
-                    </div>
+                    <img src="/logo.png" alt="Logo" className="w-full h-full object-contain" />
                 </div>
             </div>
 
@@ -73,6 +69,7 @@ const Hero: React.FC = () => {
                 href={WHATSAPP_LINK}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => console.log('WhatsApp Button Clicked (Hero)')}
                 className="flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white w-full md:w-auto px-8 py-4 rounded-full font-bold text-xl transition-all shadow-xl shadow-green-600/20 active:scale-95"
               >
                 <MessageCircle size={24} fill="currentColor" />
@@ -92,14 +89,13 @@ const Hero: React.FC = () => {
           <div className="order-2 md:order-2 flex justify-center items-center relative mt-8 md:mt-0">
              
              {/* IMAGE PLACEHOLDER */}
-<div className="relative w-64 md:w-96 aspect-square z-10 bg-white rounded-full p-6 border-4 border-white shadow-2xl flex items-center justify-center">
-  <img
-    src="/water.png"
-    alt="Water Tank Cleaning"
-    className="w-full h-full object-contain"
-  />
-
-             </div>
+            <div className="relative w-64 md:w-96 aspect-square z-10 bg-white rounded-full p-6 border-4 border-white shadow-2xl flex items-center justify-center">
+              <img
+                src="/water.png"
+                alt="Water Tank Cleaning"
+                className="w-full h-full object-contain"
+              />
+            </div>
           </div>
 
         </div>

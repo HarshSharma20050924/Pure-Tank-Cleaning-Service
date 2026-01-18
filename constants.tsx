@@ -15,7 +15,8 @@ import { ServiceItem, ProcessStep, PricingTier, FAQItem, Testimonial } from './t
 
 export const COMPANY_PHONE = "8109958822";
 export const COMPANY_EMAIL = "pure_tank810@gmail.com"; 
-export const WHATSAPP_LINK = "https://wa.me/918109958822";
+// Added pre-filled text to the URL
+export const WHATSAPP_LINK = "https://wa.me/918109958822?text=Hello%20Pure%20Tank%2C%20I%20want%20to%20book%20a%20cleaning%20service.";
 export const COMPANY_ADDRESS = "95, ग्रेटर रतन एवेन्यू, MR-5 मक्सी रोड, उज्जैन 456006 (म.प्र.)";
 export const INSTAGRAM_LINK = "https://instagram.com/pure_tank810";
 
