@@ -4,7 +4,6 @@ import {
   Factory, 
   Trash2, 
   Zap, 
-  Sparkles,
   ClipboardCheck,
   HardHat,
   Biohazard,
