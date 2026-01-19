@@ -8,6 +8,7 @@ const Contact: React.FC = () => {
     name: '',
     phone: '',
     type: 'Plastic Tank',
+    capacity: '500 - 1000 Liters', // Default value
     address: ''
   });
 
@@ -19,7 +20,7 @@ const Contact: React.FC = () => {
     e.preventDefault();
     
     // Construct WhatsApp Message
-    const message = `Hello Pure Tank,\n\nI want to book a cleaning service.\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Type:* ${formData.type}\n*Address:* ${formData.address}\n\nPlease confirm availability.`;
+    const message = `Hello Pure Tank,\n\nI want to book a cleaning service.\n\n*Name:* ${formData.name}\n*Phone:* ${formData.phone}\n*Type:* ${formData.type}\n*Capacity:* ${formData.capacity}\n*Address:* ${formData.address}\n\nPlease confirm availability.`;
     
     // Encode URL and open WhatsApp
     const whatsappUrl = `https://wa.me/918109958822?text=${encodeURIComponent(message)}`;
@@ -103,19 +104,37 @@ const Contact: React.FC = () => {
                 />
               </div>
               
-              <div>
-                <label className="text-sm font-bold text-slate-600 mb-1 block">टैंक का प्रकार (Type)</label>
-                <select 
-                  name="type"
-                  value={formData.type}
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 font-medium"
-                >
-                  <option>Plastic Tank</option>
-                  <option>Cemented Tank</option>
-                  <option>Underground Tank</option>
-                  <option>Others</option>
-                </select>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-bold text-slate-600 mb-1 block">टैंक का प्रकार (Type)</label>
+                  <select 
+                    name="type"
+                    value={formData.type}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 font-medium text-sm"
+                  >
+                    <option>Plastic Tank</option>
+                    <option>Cemented Tank</option>
+                    <option>Underground Tank</option>
+                    <option>Others</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="text-sm font-bold text-slate-600 mb-1 block">साइज (Capacity)</label>
+                  <select 
+                    name="capacity"
+                    value={formData.capacity}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 bg-slate-50 border-2 border-slate-200 rounded-xl focus:outline-none focus:border-blue-500 font-medium text-sm"
+                  >
+                    <option>500 - 1000 Liters</option>
+                    <option>1500 - 2000 Liters</option>
+                    <option>3000 - 5000 Liters</option>
+                    <option>5000+ Liters</option>
+                    <option>Don't Know (पता नहीं)</option>
+                  </select>
+                </div>
               </div>
 
               <div>

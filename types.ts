@@ -23,6 +23,22 @@ export interface PricingTier {
   }[];
 }
 
+export interface SubscriptionPlan {
+  title: string;
+  duration: string;
+  features: string[];
+  isPopular?: boolean;
+}
+
+export interface VideoTestimonial {
+  id: string;
+  customerName: string;
+  address: string;
+  thumbnailUrl: string;
+  videoSrc: string; // Changed: Local path (e.g., "/videos/vid1.mp4")
+  duration: string;
+}
+
 export interface FAQItem {
   question: string;
   answer: string;

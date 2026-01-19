@@ -9,16 +9,17 @@ import {
   Biohazard,
   Wrench,
   Clock,
-  SprayCan // Changed from Sparkles for pressure washing to look less generic
+  SprayCan 
 } from 'lucide-react';
-import { ServiceItem, ProcessStep, PricingTier, FAQItem, Testimonial } from './types';
+import { ServiceItem, ProcessStep, PricingTier, FAQItem, Testimonial, VideoTestimonial, SubscriptionPlan } from './types';
 
 export const COMPANY_PHONE = "8109958822";
 export const COMPANY_EMAIL = "pure_tank810@gmail.com"; 
-// Added pre-filled text to the URL
 export const WHATSAPP_LINK = "https://wa.me/918109958822?text=Hello%20Pure%20Tank%2C%20I%20want%20to%20book%20a%20cleaning%20service.";
 export const COMPANY_ADDRESS = "95, ग्रेटर रतन एवेन्यू, MR-5 मक्सी रोड, उज्जैन 456006 (म.प्र.)";
 export const INSTAGRAM_LINK = "https://instagram.com/pure_tank810";
+
+export const WORKING_HOURS = "9:00 AM – 6:00 PM";
 
 export const SERVICES: ServiceItem[] = [
   {
@@ -76,7 +77,7 @@ export const PROCESS_STEPS: ProcessStep[] = [
     id: 5,
     title: 'प्रेशर वॉशिंग (Pressure Washing)',
     description: 'अंत में हाई-प्रेशर जेट स्प्रे से धुलाई ताकि टंकी बिल्कुल नई जैसी हो जाए।',
-    icon: SprayCan, // Changed icon
+    icon: SprayCan, 
   },
 ];
 
@@ -99,11 +100,82 @@ export const PRICING_DATA: PricingTier[] = [
   },
 ];
 
+export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
+  {
+    title: "Quarterly Plan",
+    duration: "3 Months",
+    features: [
+      "Regular Cleaning Reminder",
+      "Free Filter Jali Installation",
+      "Nal Pipe Cleaning Free",
+      "Priority Support"
+    ],
+    isPopular: false
+  },
+  {
+    title: "Half-Yearly Plan",
+    duration: "6 Months",
+    features: [
+      "2 Scheduled Cleanings",
+      "Free Filter Jali Installation",
+      "Nal Pipe Cleaning Free",
+      "Water TDS Check Free",
+      "Priority Emergency Service"
+    ],
+    isPopular: true
+  }
+];
+
+// NOTE: Please ensure you create a 'videos' folder in your 'public' directory
+// and add the mp4 files matching these names.
+export const CUSTOMER_VIDEOS: VideoTestimonial[] = [
+  {
+    id: 'vid1',
+    customerName: "Dr. Sanjay Khede",
+    address: "Prem Avenue, Ujjain",
+    thumbnailUrl: "photos/sanjay.png",
+    videoSrc: "/videos/sanjay.mp4", 
+    duration: "0:15"
+  },
+  {
+    id: 'vid2',
+    customerName: "Ram Sharma",
+    address: "Tirupati Solitaire, Ujjain",
+    thumbnailUrl: "photos/ram.png",
+    videoSrc: "/videos/ram.mp4",
+    duration: "0:20"
+  },
+  {
+    id: 'vid3',
+    customerName: "Rameshchandra Ji",
+    address: "Prem Avenue, Ujjain",
+    thumbnailUrl: "photos/ramesh.png",
+    videoSrc: "/videos/ramesh.mp4",
+    duration: "0:12"
+  },
+  {
+    id: 'vid4',
+    customerName: "Dinesh Ji Gupta",
+    address: "Durga Colony, Ujjain",
+    thumbnailUrl: "photos/dinesh.png",
+    videoSrc: "/videos/dinesh.mp4",
+    duration: "0:18"
+  }
+];
+
 export const QUALITY_POINTS = [
   { text: "शुद्ध और सुरक्षित सफाई", icon: ShieldCheck },
   { text: "किफायती दाम", icon: ClipboardCheck },
   { text: "समय पर सर्विस", icon: Clock },
   { text: "ग्राहक संतुष्टि की गारंटी", icon: Biohazard },
+];
+
+export const SAFETY_GEAR = [
+  "Helmet (हेलमेट)",
+  "Mask (मास्क)",
+  "Safety Goggles (सुरक्षा चश्मा)",
+  "Gloves (दस्ताने)",
+  "Jute Shoe Cover (जूट शू कवर)"
 ];
 
 export const TESTIMONIALS: Testimonial[] = [

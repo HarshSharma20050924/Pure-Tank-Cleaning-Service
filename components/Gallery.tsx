@@ -21,7 +21,7 @@ const Gallery: React.FC = () => {
           {/* PHOTO 1: Dirty Tank */}
           <div className="relative group overflow-hidden rounded-xl border-2 border-red-500/50 h-64">
              <img 
-               src="/Dirty.jpeg" 
+               src="/photos/Dirty.jpeg" 
                alt="Dirty water tank" 
                className="w-full h-full object-cover opacity-90 transition-transform duration-500 group-hover:scale-110"
              />
@@ -34,7 +34,7 @@ const Gallery: React.FC = () => {
           {/* PHOTO 2: Clean Tank */}
           <div className="relative group overflow-hidden rounded-xl border-2 border-green-500/50 h-64">
             <img 
-               src="/2.jpg" 
+               src="/photos/2.jpg" 
                alt="Clean Tank" 
                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
              />
@@ -47,7 +47,7 @@ const Gallery: React.FC = () => {
           {/* PHOTO 3: Clean Water */}
           <div className="relative group overflow-hidden rounded-xl border-2 border-green-500/50 h-64">
             <img 
-               src="/Clean1.jpeg" 
+               src="/photos/1.jpg" 
                alt="Clear Water" 
                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
              />

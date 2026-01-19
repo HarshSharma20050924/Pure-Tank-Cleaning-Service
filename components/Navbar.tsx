@@ -29,7 +29,7 @@ const Navbar: React.FC = () => {
         <div className="flex items-center gap-3">
           {/* Logo Image */}
           <div className="h-10 w-10 bg-white rounded-full flex items-center justify-center overflow-hidden border-2 border-[#0B2F5C] shadow-sm shrink-0">
-             <img src="/logo.png" alt="Logo" className="h-full w-full object-cover" />
+             <img src="/photos/logo.png" alt="Logo" className="h-full w-full object-cover" />
           </div>
 
           <div className="flex flex-col">

@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { COMPANY_EMAIL, COMPANY_PHONE, COMPANY_ADDRESS } from '../constants';
 import { Phone, MapPin, Mail } from 'lucide-react';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  onOpenStaffPortal?: () => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ onOpenStaffPortal }) => {
+  const [tapCount, setTapCount] = useState(0);
+
+  // Reset tap count if user stops tapping for 2 seconds
+  useEffect(() => {
+    let timer: any;
+    if (tapCount > 0) {
+      timer = setTimeout(() => setTapCount(0), 2000);
+    }
+    
+    // If 5 taps detected, open portal and reset
+    if (tapCount >= 5) {
+      if (onOpenStaffPortal) {
+        onOpenStaffPortal();
+      }
+      setTapCount(0);
+    }
+
+    return () => clearTimeout(timer);
+  }, [tapCount, onOpenStaffPortal]);
+
   return (
     <footer className="bg-slate-950 text-slate-400 py-12 border-t border-slate-900">
       <div className="container mx-auto px-6">
@@ -51,8 +75,22 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div className="border-t border-slate-900 pt-8 text-center text-xs text-slate-600">
-            © 2024 Pure Tank Cleaning Service Ujjain. All rights reserved.
+        <div className="border-t border-slate-900 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            {/* 
+              SECRET TRIGGER:
+              Clicking this text 5 times rapidly will open the Staff Portal.
+              This keeps the UI clean for clients while allowing staff access.
+            */}
+            <div 
+                onClick={() => setTapCount(prev => prev + 1)}
+                className="text-xs text-slate-600 text-center md:text-left select-none cursor-default active:text-slate-400 transition-colors"
+            >
+                © 2024 Pure Tank Cleaning Service Ujjain. All rights reserved.
+            </div>
+            
+            <div className="text-xs text-slate-700 hidden md:block">
+              Ujjain's #1 Tank Cleaning
+            </div>
         </div>
       </div>
     </footer>
