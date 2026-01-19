@@ -34,7 +34,7 @@ const Gallery: React.FC = () => {
           {/* PHOTO 2: Clean Tank */}
           <div className="relative group overflow-hidden rounded-xl border-2 border-green-500/50 h-64">
             <img 
-               src="/Clean.jpeg" 
+               src="/2.jpg" 
                alt="Clean Tank" 
                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
              />
