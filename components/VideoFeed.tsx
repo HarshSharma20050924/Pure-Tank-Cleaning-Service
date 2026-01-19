@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { CUSTOMER_VIDEOS } from '../constants';
-import { Play, MapPin, Clock, Pause } from 'lucide-react';
+import { Play, MapPin, Clock } from 'lucide-react';
 
 const VideoFeed: React.FC = () => {
   const [playingId, setPlayingId] = useState<string | null>(null);
