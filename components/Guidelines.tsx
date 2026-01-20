@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Shield, UserCheck, AlertTriangle, FileCheck, Info, QrCode, ShoppingBag, ThermometerSun, Droplets, Zap, ArrowRight, X } from 'lucide-react';
+import { Shield, UserCheck, AlertTriangle, FileCheck, Info, QrCode, ShoppingBag, ThermometerSun, Droplets, ArrowRight, X } from 'lucide-react';
 import { SAFETY_GEAR, COMPANY_PHONE } from '../constants';
 
 const Guidelines: React.FC = () => {
