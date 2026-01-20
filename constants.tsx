@@ -102,27 +102,28 @@ export const PRICING_DATA: PricingTier[] = [
 
 export const SUBSCRIPTION_PLANS: SubscriptionPlan[] = [
   {
-    title: "Quarterly Plan",
-    duration: "3 Months",
+    title: "Premium Plan (Quarterly Service)",
+    duration: "1 Year Validity",
     features: [
-      "Regular Cleaning Reminder",
-      "Free Filter Jali Installation",
-      "Nal Pipe Cleaning Free",
-      "Priority Support"
-    ],
-    isPopular: false
-  },
-  {
-    title: "Half-Yearly Plan",
-    duration: "6 Months",
-    features: [
-      "2 Scheduled Cleanings",
+      "Total 4 Cleanings (Every 3 Months)",
+      "UV Bacteria Treatment Included",
       "Free Filter Jali Installation",
       "Nal Pipe Cleaning Free",
       "Water TDS Check Free",
-      "Priority Emergency Service"
+      "Priority Support"
     ],
     isPopular: true
+  },
+  {
+    title: "Standard Plan (Half-Yearly Service)",
+    duration: "1 Year Validity",
+    features: [
+      "Total 2 Cleanings (Every 6 Months)",
+      "Free Filter Jali Installation",
+      "Nal Pipe Cleaning Free",
+      "Water TDS Check Free"
+    ],
+    isPopular: false
   }
 ];
 
