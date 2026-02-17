@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://puretankcleaning.com/sitemap.xml
+Sitemap: https://puretankcleaning.in/sitemap.xml
