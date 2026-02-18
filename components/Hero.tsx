@@ -25,7 +25,7 @@ const Hero: React.FC = () => {
             {/* LOGO IN HERO */}
             <div className="mb-6 inline-block">
                 <div className="h-20 w-20 md:h-24 md:w-24 bg-white rounded-full flex items-center justify-center border-4 border-[#1e40af] shadow-lg overflow-hidden relative mx-auto md:mx-0">
-                    <img src="/photos/logo.png" alt="Logo" className="w-full h-full object-contain" />
+                    <img src="logo.png" alt="Logo" className="w-full h-full object-contain" />
                 </div>
             </div>
 

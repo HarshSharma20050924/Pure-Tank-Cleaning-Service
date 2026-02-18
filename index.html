@@ -82,14 +82,17 @@
     }
     </script>
 
-    <!-- Favicon: prefer a raster PNG for Google SERP, keep SVG as fallback -->
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="icon" href="/photos/logo.png" type="image/png" sizes="48x48" />
-    <link rel="icon" href="/photos/logo.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/photos/logo.png" sizes="180x180" />
-    <link rel="mask-icon" href="/photos/logo-circular.svg" color="#0B2F5C" />
-    <link rel="manifest" href="/manifest.json">
+    <!-- 
+      FAVICON SETTINGS FOR GOOGLE 
+      Note: Removed '/photos/' prefix as the file is likely in public/logo.png
+    -->
+    <link rel="icon" href="/logo.png" type="image/png" sizes="48x48" />
+    <link rel="icon" href="/logo.png" type="image/png" sizes="96x96" />
+    <link rel="icon" href="/logo.png" type="image/png" sizes="144x144" />
+    <link rel="apple-touch-icon" href="/logo.png" sizes="180x180" />
     <meta name="theme-color" content="#0B2F5C" />
+    
+    <link rel="manifest" href="/manifest.json">
   <script type="importmap">
 {
   "imports": {
@@ -106,8 +109,7 @@
   <body class="bg-[#F0F9FF] text-slate-900 antialiased">
     <div id="root">
       <!-- 
-        PRELOADER: This content is visible only while React is loading. 
-        Once the app mounts, React will replace this entire div content.
+        PRELOADER
       -->
       <style>
         .loader-container {
