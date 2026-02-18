@@ -82,11 +82,14 @@
     }
     </script>
 
-    <!-- Favicon -->
+    <!-- Favicon: prefer a raster PNG for Google SERP, keep SVG as fallback -->
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="icon" href="/photos/logo.png" type="image/png" sizes="48x48" />
     <link rel="icon" href="/photos/logo.svg" type="image/svg+xml" />
-    <link rel="alternate icon" href="/photos/logo.png" />
-    <link rel="apple-touch-icon" href="/photos/logo.png" />
+    <link rel="apple-touch-icon" href="/photos/logo.png" sizes="180x180" />
+    <link rel="mask-icon" href="/photos/logo-circular.svg" color="#0B2F5C" />
     <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#0B2F5C" />
   <script type="importmap">
 {
   "imports": {
