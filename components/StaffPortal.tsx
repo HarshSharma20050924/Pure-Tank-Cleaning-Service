@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { X, CheckCircle, Send, User, Phone, Lock, KeyRound, QrCode, ArrowLeft, Calendar, FileText, Plus, Trash2 as Trash, Download } from 'lucide-react';
-import { COMPANY_PHONE, COMPANY_EMAIL, PRICING_DATA } from '../constants';
+import { COMPANY_PHONE, COMPANY_EMAIL } from '../constants';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
@@ -29,7 +29,10 @@ const StaffPortal: React.FC<StaffPortalProps> = ({ isOpen, onClose }) => {
   const [appointmentTime, setAppointmentTime] = useState('');
 
   // Form State - Bill
-  const [selectedServices, setSelectedServices] = useState<{ name: string; price: number }[]>([]);
+  const [selectedServices, setSelectedServices] = useState<{ name: string; price: number; quantity: number }[]>([]);
+  const [billTankType, setBillTankType] = useState('Plastic Tank');
+  const [customServiceName, setCustomServiceName] = useState('');
+  const [customServicePrice, setCustomServicePrice] = useState('');
 
   // Reset state when modal closes or opens
   useEffect(() => {
@@ -220,11 +223,11 @@ Our team will reach your location as per the scheduled time. Thank you for choos
       i + 1,
       translateService(s.name),
       `Rs. ${s.price}`,
-      '1 Unit',
-      `Rs. ${s.price}`
+      `${s.quantity}`,
+      `Rs. ${s.price * s.quantity}`
     ]);
 
-    const grandTotal = selectedServices.reduce((sum, s) => sum + s.price, 0);
+    const grandTotal = selectedServices.reduce((sum, s) => sum + (s.price * s.quantity), 0);
 
     autoTable(doc, {
       startY: 85,
@@ -288,9 +291,25 @@ Our team will reach your location as per the scheduled time. Thank you for choos
     doc.save(`Invoice_${customerName.replace(/\s+/g, '_') || 'Customer'}_${date}.pdf`);
   };
 
-  const addService = (name: string, price: string) => {
-    const numericPrice = parseInt(price.replace(/\D/g, ''));
-    setSelectedServices(prev => [...prev, { name, price: numericPrice }]);
+  const addService = (name: string, price: string | number, quantity: number = 1) => {
+    const numericPrice = typeof price === 'string' ? parseInt(price.replace(/\D/g, '')) : price;
+    if (isNaN(numericPrice)) return;
+
+    // If it's a predefined service from the list, we might want to aggregate
+    // But the user said "separate both tanks", so maybe always add as a new item?
+    // "fully customizable we can add range of litle by ourseelf remove 500-1000 hardcode"
+
+    setSelectedServices(prev => [...prev, { name, price: numericPrice, quantity }]);
+  };
+
+  const updateQuantity = (index: number, delta: number) => {
+    setSelectedServices(prev => prev.map((s, i) => {
+      if (i === index) {
+        const newQty = Math.max(1, s.quantity + delta);
+        return { ...s, quantity: newQty };
+      }
+      return s;
+    }));
   };
 
   const removeService = (index: number) => {
@@ -445,16 +464,13 @@ Our team will reach your location as per the scheduled time. Thank you for choos
                       </div>
                       <div>
                         <label className="block text-sm font-bold text-slate-700 mb-1">Capacity</label>
-                        <select
+                        <input
+                          type="text"
                           value={tankCapacity}
                           onChange={(e) => setTankCapacity(e.target.value)}
+                          placeholder="e.g. 800 - 900 Liters"
                           className="w-full px-3 py-2.5 bg-slate-50 border border-slate-200 rounded-lg focus:outline-none focus:border-blue-500 text-sm"
-                        >
-                          <option>500 - 1000 Liters</option>
-                          <option>1500 - 2000 Liters</option>
-                          <option>3000 - 5000 Liters</option>
-                          <option>5000+ Liters</option>
-                        </select>
+                        />
                       </div>
                     </div>
 
@@ -522,39 +538,96 @@ Our team will reach your location as per the scheduled time. Thank you for choos
                 {activeTab === 'bill' && (
                   /* BILL FORM */
                   <div className="space-y-4 animate-in slide-in-from-right-4 duration-300">
-                    <div>
-                      <label className="block text-xs font-bold text-slate-400 uppercase tracking-tight mb-2">Available Services</label>
-                      <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
-                        {PRICING_DATA.map((category) => (
-                          <div key={category.category} className="space-y-1">
-                            <p className="text-[10px] font-black text-slate-400">{category.category}</p>
-                            {category.items.map((item, id) => (
-                              <button
-                                key={id}
-                                onClick={() => addService(`${category.category.split(' ')[0]} - ${item.capacity}`, item.price)}
-                                className="w-full flex justify-between items-center p-2 bg-slate-50 hover:bg-blue-50 border border-slate-200 rounded-md text-left transition-colors"
-                              >
-                                <span className="text-xs font-medium text-slate-700">{item.capacity}</span>
-                                <span className="text-xs font-bold text-blue-600 flex items-center gap-1">
-                                  {item.price} <Plus size={12} />
-                                </span>
-                              </button>
-                            ))}
-                          </div>
-                        ))}
+                    {/* Entry Form */}
+                    <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-4">
+                      <label className="block text-[10px] font-bold text-slate-500 uppercase tracking-wider">Service Details</label>
+
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-400 mb-1">Tank Type / Service</label>
+                        <select
+                          value={billTankType}
+                          onChange={(e) => setBillTankType(e.target.value)}
+                          className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-blue-500"
+                        >
+                          <option>Plastic Tank</option>
+                          <option>Cemented Tank</option>
+                          <option>Underground Sump</option>
+                          <option>Full House Cleaning</option>
+                          <option>Custom Service</option>
+                        </select>
                       </div>
+
+                      <div className="grid grid-cols-2 gap-3">
+                        <div>
+                          <label className="block text-[10px] font-bold text-slate-400 mb-1">Liters / Details</label>
+                          <input
+                            type="text"
+                            value={customServiceName}
+                            onChange={(e) => setCustomServiceName(e.target.value)}
+                            placeholder="e.g. 1000L"
+                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-blue-500"
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-[10px] font-bold text-slate-400 mb-1">Price (₹)</label>
+                          <input
+                            type="number"
+                            value={customServicePrice}
+                            onChange={(e) => setCustomServicePrice(e.target.value)}
+                            placeholder="Amount"
+                            className="w-full px-3 py-2 bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:border-blue-500"
+                          />
+                        </div>
+                      </div>
+
+                      <button
+                        onClick={() => {
+                          if (customServicePrice) {
+                            const displayName = customServiceName
+                              ? `${billTankType} - ${customServiceName}`
+                              : billTankType;
+                            addService(displayName, customServicePrice);
+                            setCustomServiceName('');
+                            setCustomServicePrice('');
+                          }
+                        }}
+                        disabled={!customServicePrice}
+                        className="w-full py-2.5 bg-blue-600 hover:bg-blue-700 disabled:bg-slate-300 text-white text-xs font-bold rounded-lg transition-colors flex items-center justify-center gap-1 shadow-sm"
+                      >
+                        <Plus size={14} /> Add to Bill
+                      </button>
                     </div>
 
                     {selectedServices.length > 0 && (
                       <div className="border-t border-slate-100 pt-3">
                         <label className="block text-[10px] font-bold text-slate-400 uppercase mb-2">Selected Services</label>
-                        <div className="space-y-2">
+                        <div className="space-y-2 max-h-[220px] overflow-y-auto pr-1">
                           {selectedServices.map((service, index) => (
                             <div key={index} className="flex justify-between items-center p-2 bg-blue-50/50 rounded-lg animate-in zoom-in-95 duration-200">
-                              <span className="text-[11px] font-bold text-slate-700">{service.name}</span>
-                              <div className="flex items-center gap-3">
-                                <span className="text-xs font-black text-blue-900">₹{service.price}</span>
-                                <button onClick={() => removeService(index)} className="text-red-400 hover:text-red-600">
+                              <div className="flex flex-col">
+                                <span className="text-[11px] font-bold text-slate-700">{service.name}</span>
+                                <span className="text-[9px] text-slate-500">₹{service.price} × {service.quantity}</span>
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <div className="flex items-center bg-white border border-slate-200 rounded-lg overflow-hidden">
+                                  <button
+                                    onClick={() => updateQuantity(index, -1)}
+                                    className="px-2 py-1 hover:bg-slate-50 text-slate-500 border-r border-slate-100"
+                                  >
+                                    -
+                                  </button>
+                                  <span className="px-2 text-[11px] font-bold text-blue-600 min-w-[24px] text-center">
+                                    {service.quantity}
+                                  </span>
+                                  <button
+                                    onClick={() => updateQuantity(index, 1)}
+                                    className="px-2 py-1 hover:bg-slate-50 text-slate-500 border-l border-slate-100 font-bold"
+                                  >
+                                    +
+                                  </button>
+                                </div>
+                                <span className="text-xs font-black text-blue-900 w-16 text-right">₹{service.price * service.quantity}</span>
+                                <button onClick={() => removeService(index)} className="p-1 text-red-400 hover:text-red-600 ml-1">
                                   <Trash size={14} />
                                 </button>
                               </div>
@@ -562,7 +635,7 @@ Our team will reach your location as per the scheduled time. Thank you for choos
                           ))}
                           <div className="flex justify-between items-center pt-2 border-t border-dashed border-slate-300 px-2">
                             <span className="font-bold text-slate-900 text-sm">Grand Total:</span>
-                            <span className="font-black text-blue-700 text-lg">₹{selectedServices.reduce((sum, s) => sum + s.price, 0)}</span>
+                            <span className="font-black text-blue-700 text-lg">₹{selectedServices.reduce((sum, s) => sum + (s.price * s.quantity), 0)}</span>
                           </div>
                         </div>
                       </div>
