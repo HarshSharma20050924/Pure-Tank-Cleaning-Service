@@ -1,0 +1,25 @@
+{
+    "short_name": "Pure Tank",
+    "name": "Pure Tank Cleaning Service Ujjain",
+    "description": "Ujjain's #1 Water Tank Cleaning Service. Hygienic & Mechanized Tank Cleaning.",
+    "icons": [
+        {
+            "src": "/logo.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "/logo.png",
+            "type": "image/png",
+            "sizes": "512x512",
+            "purpose": "any maskable"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait",
+    "theme_color": "#0B2F5C",
+    "background_color": "#ffffff",
+    "scope": "/"
+}
