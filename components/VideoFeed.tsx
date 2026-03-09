@@ -4,7 +4,7 @@ import { Play, MapPin, Clock } from 'lucide-react';
 
 const VideoFeed: React.FC = () => {
   const [playingId, setPlayingId] = useState<string | null>(null);
-  
+
   // Ref to handle pausing other videos if we were to expand features
   const videoRefs = useRef<{ [key: string]: HTMLVideoElement | null }>({});
 
@@ -26,7 +26,7 @@ const VideoFeed: React.FC = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {CUSTOMER_VIDEOS.map((video) => (
             <div key={video.id} className="bg-slate-800 rounded-xl overflow-hidden border border-slate-700 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
-              
+
               {/* VIDEO PLAYER AREA - FORCED VERTICAL ASPECT RATIO (9:16) */}
               <div className="relative aspect-[9/16] bg-black group">
                 {playingId === video.id ? (
@@ -43,17 +43,17 @@ const VideoFeed: React.FC = () => {
                     Your browser does not support the video tag.
                   </video>
                 ) : (
-                  <button 
+                  <button
                     onClick={() => handlePlay(video.id)}
                     className="w-full h-full relative cursor-pointer block text-left"
                     aria-label={`Play video from ${video.customerName}`}
                   >
-                    <img 
-                      src={video.thumbnailUrl} 
-                      alt={video.customerName} 
+                    <img
+                      src={video.thumbnailUrl}
+                      alt={video.customerName}
                       className="w-full h-full object-cover opacity-90 group-hover:opacity-75 transition-opacity"
                     />
-                    
+
                     {/* Play Button Overlay */}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-14 h-14 bg-white/20 backdrop-blur-sm border border-white/40 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
@@ -63,8 +63,8 @@ const VideoFeed: React.FC = () => {
 
                     {/* Duration Badge */}
                     <div className="absolute top-3 right-3 bg-black/70 backdrop-blur-md text-white text-[10px] font-bold px-2 py-1 rounded-md flex items-center gap-1">
-                        <Clock size={10} />
-                        {video.duration}
+                      <Clock size={10} />
+                      {video.duration}
                     </div>
 
                     {/* Gradient overlay for text readability */}
